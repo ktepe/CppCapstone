@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.dat": "cpp",
+        "istream": "cpp",
+        "variant": "cpp"
+    }
+}
