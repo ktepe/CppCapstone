@@ -1,0 +1,20 @@
+https://github.com/microsoft/cpprestsdk
+
+
+https://mariusbancila.ro/blog/2013/08/19/full-fledged-client-server-example-with-cpprest-sdk-110/
+
+#cmake file for cpprestsdk
+https://medium.com/@ngerakines/dipping-a-toe-into-cpprestsdk-a40b063fe3f5
+
+microservices with rest sdk
+https://github.com/ivanmejiarocha/micro-service/blob/master/source/main.cpp
+
+
+Step 1: Install using apt-get
+You can easily install JsonCpp library on Ubuntu or another flavor of Debian Linux simply by running the following command:
+sudo apt-get install libjsoncpp-dev
+It will install the compatible JsonCpp library on your system.
+
+Step 2: Example program and compiler flag To compile a C++ program that uses JsonCpp library use the compiler flag:
+-ljsoncpp
+Create a Json file called profile.json with the following content:
