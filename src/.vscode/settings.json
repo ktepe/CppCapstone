@@ -3,5 +3,6 @@
         "*.dat": "cpp",
         "istream": "cpp",
         "variant": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

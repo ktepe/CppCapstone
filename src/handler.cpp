@@ -29,17 +29,7 @@ void handler::handle_error(pplx::task<void>& t)
         // Ignore the error, Log it if a logger is available
     }
 }
-std::vector<std::string> handler::split(std::string str,std::string sep){
-    char* cstr=const_cast<char*>(str.c_str());
-    char* current;
-    std::vector<std::string> arr;
-    current=strtok(cstr,sep.c_str());
-    while(current!=NULL){
-        arr.push_back(current);
-        current=strtok(NULL,sep.c_str());
-    }
-    return arr;
-}
+
 
 //
 // Get Request 
@@ -72,14 +62,8 @@ void handler::handle_get(http_request message)
     auto v3 = split(arr2[3], "=");
     std::cout << " v3's "<< v3[0] << " "<<v3[1]<< std::endl;
 
-    /*
-    json::value data2;
-    data2[v1[0]]= v1[1];
-    data2[v2[0]]= v2[1];
-    data2[v3[0]]= v3[1];
-    //data2["price"] = "40000";
-    */
-   
+
+
     Json::Value data1;
     data1[v1[0]]= v1[1];
     data1[v2[0]]= v2[1];
@@ -97,7 +81,7 @@ void handler::handle_get(http_request message)
 	//Dbms* d  = new Dbms();
     //d->connect();
     //ucout<< " concurrency "<< (concurrency::streams::fstream:: open_istream(U("."+message.relative_uri().path()),std::ios::in).get() )<< std::endl;  
-    concurrency::streams::fstream::open_istream(U("./index.html"), std::ios::in).then([=](concurrency::streams::istream is)
+    concurrency::streams::fstream::open_istream(U("../data/index.html"), std::ios::in).then([=](concurrency::streams::istream is)
     // concurrency::streams::fstream::open_istream(U("."+message.relative_uri().path()), std::ios::in).then([=](concurrency::streams::istream is)
     {
         
