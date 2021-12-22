@@ -1,5 +1,5 @@
 #include "handler.h"
-#include <jsoncpp/json/json.h>
+#include "json_parser.h"
 
 handler::handler()
 {
@@ -43,49 +43,16 @@ void handler::handle_get(http_request message)
     ucout << "path " << message.relative_uri().to_string() << std::endl;
     std::string path1 = message.relative_uri().to_string();
     ucout << "path data string" << message.relative_uri().to_string() << std::endl;
-    auto arr=split(path1,"?");
-    for(size_t i=0;i<arr.size();i++)
-        ucout << arr[i] << std::endl;
-        //printf("%s\n",arr[i].c_str());
-    auto arr2=split(path1,"&");
-    for(size_t i=0;i<arr2.size();i++)
-        ucout << arr2[i] << std::endl;
-
-    ucout << "size of arr2 :"<<arr2.size() << std::endl;
     
-    auto v1 = split(arr2[1], "=");
-    std::cout << " v1's "<< v1[0] << " "<<v1[1]<< std::endl;
-
-    auto v2 = split(arr2[2], "=");
-    std::cout << " v2's "<< v2[0] << " "<<v2[1]<< std::endl;
-
-    auto v3 = split(arr2[3], "=");
-    std::cout << " v3's "<< v3[0] << " "<<v3[1]<< std::endl;
-
-
-
-    Json::Value data1;
-    data1[v1[0]]= v1[1];
-    data1[v2[0]]= v2[1];
-    data1[v3[0]]= v3[1];
-    data1["price"] = "40000";
-    Json::FastWriter fastWriter;
-    std::string a = fastWriter.write(data1);
-
-
-
-    std::cout << "json out " << a << std::endl;
-
-    //if request is legit read the database file and return the price
-
-	//Dbms* d  = new Dbms();
-    //d->connect();
     //ucout<< " concurrency "<< (concurrency::streams::fstream:: open_istream(U("."+message.relative_uri().path()),std::ios::in).get() )<< std::endl;  
     concurrency::streams::fstream::open_istream(U("../data/index.html"), std::ios::in).then([=](concurrency::streams::istream is)
     // concurrency::streams::fstream::open_istream(U("."+message.relative_uri().path()), std::ios::in).then([=](concurrency::streams::istream is)
     {
-        
-        message.reply(status_codes::OK, U(a), U("application/json"))
+        Json_Parser json_obj;
+        json_obj.parse(path1);
+        auto json_valstr = json_obj.get_string();
+
+        message.reply(status_codes::OK, U(json_valstr), U("application/json"))
         //message.reply(status_codes::OK, is,  U("text/htmls"))
 		.then([](pplx::task<void> t)
 		{

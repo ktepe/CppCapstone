@@ -28,7 +28,7 @@ class handler
         void handle_post(http_request message);
         void handle_delete(http_request message);
         void handle_error(pplx::task<void>& t);
-        std::vector<std::string> split(std::string str,std::string sep);
+        //std::vector<std::string> split(std::string str,std::string sep);
         http_listener m_listener;
 };
 

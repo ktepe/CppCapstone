@@ -28,7 +28,7 @@ add_executable(HelloWorld src/main.cpp)
 
 add_executable(Client src/nclient.cpp)
 
-add_executable(Wserv  src/webserver.cpp src/handler.cpp )
+add_executable(Wserv  src/webserver.cpp src/handler.cpp src/json_parser.cpp)
 
 #add_executable(restserver
 #  main.cpp
