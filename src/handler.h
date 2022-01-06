@@ -2,20 +2,20 @@
 #define HANDLER_H
 #include <iostream>
 #include "stdafx.h"
-
-using namespace std;
+//#include "utils.h"
+//using namespace std;
 using namespace web;
 using namespace http;
 using namespace utility;
 using namespace http::experimental::listener;
 
 
-class handler
+class Handler
 {
     public:
-        handler();
-        handler(utility::string_t url);
-        virtual ~handler();
+        Handler();
+        Handler(utility::string_t url);
+        virtual ~Handler();
 
         pplx::task<void>open(){return m_listener.open();}
         pplx::task<void>close(){return m_listener.close();}
@@ -28,7 +28,7 @@ class handler
         void handle_post(http_request message);
         void handle_delete(http_request message);
         void handle_error(pplx::task<void>& t);
-        //std::vector<std::string> split(std::string str,std::string sep);
+        std::vector<std::string> split(std::string str,std::string sep);
         http_listener m_listener;
 };
 

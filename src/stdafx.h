@@ -1,7 +1,7 @@
 #ifndef STDAFX_H_INCLUDED
 #define STDAFX_H_INCLUDED
 
-#pragma once
+//#pragma once
 
 #include <string>
 #include <vector>

@@ -1,24 +1,24 @@
 #include "handler.h"
 #include "json_parser.h"
 
-handler::handler()
+Handler::Handler()
 {
     //ctor
 }
-handler::handler(utility::string_t url):m_listener(url)
+Handler::Handler(utility::string_t url):m_listener(url)
 {
-    m_listener.support(methods::GET, std::bind(&handler::handle_get, this, std::placeholders::_1));
-    m_listener.support(methods::PUT, std::bind(&handler::handle_put, this, std::placeholders::_1));
-    m_listener.support(methods::POST, std::bind(&handler::handle_post, this, std::placeholders::_1));
-    m_listener.support(methods::DEL, std::bind(&handler::handle_delete, this, std::placeholders::_1));
+    m_listener.support(methods::GET, std::bind(&Handler::handle_get, this, std::placeholders::_1));
+    m_listener.support(methods::PUT, std::bind(&Handler::handle_put, this, std::placeholders::_1));
+    m_listener.support(methods::POST, std::bind(&Handler::handle_post, this, std::placeholders::_1));
+    m_listener.support(methods::DEL, std::bind(&Handler::handle_delete, this, std::placeholders::_1));
 
 }
-handler::~handler()
+Handler::~Handler()
 {
     //dtor
 }
 
-void handler::handle_error(pplx::task<void>& t)
+void Handler::handle_error(pplx::task<void>& t)
 {
     try
     {
@@ -34,9 +34,9 @@ void handler::handle_error(pplx::task<void>& t)
 //
 // Get Request 
 //
-void handler::handle_get(http_request message)
+void Handler::handle_get(http_request message)
 {
-    ucout << " handler message: " << message.to_string() << endl;
+    ucout << " handler message: " << message.to_string() << std::endl;
 
     auto paths = http::uri::split_path(http::uri::decode(message.relative_uri().path()));
 
@@ -78,85 +78,11 @@ void handler::handle_get(http_request message)
 
 };
 
-/*
-void handler::handle_get(http_request message)
-{
-    ucout << " handler message: " << message.to_string() << endl;
-
-    auto paths = http::uri::split_path(http::uri::decode(message.relative_uri().path()));
-
-    ucout << "path " << message.relative_uri().to_string() << std::endl;
-    std::string path1 = message.relative_uri().to_string();
-    ucout << "path data string" << message.relative_uri().to_string() << std::endl;
-    auto arr=split(path1,"?");
-    for(size_t i=0;i<arr.size();i++)
-        ucout << arr[i] << std::endl;
-        //printf("%s\n",arr[i].c_str());
-    auto arr2=split(path1,"&");
-    for(size_t i=0;i<arr2.size();i++)
-        ucout << arr2[i] << std::endl;
-
-    ucout << "size of arr2 :"<<arr2.size() << std::endl;
-    
-    auto v1 = split(arr2[1], "=");
-    std::cout << " v1's "<< v1[0] << " "<<v1[1]<< std::endl;
-
-    auto v2 = split(arr2[2], "=");
-    std::cout << " v2's "<< v2[0] << " "<<v2[1]<< std::endl;
-
-    auto v3 = split(arr2[3], "=");
-    std::cout << " v3's "<< v3[0] << " "<<v3[1]<< std::endl;
-
-    Json::Value data1;
-    data1[v1[0]]= v1[1];
-    data1[v2[0]]= v2[1];
-    data1[v3[0]]= v3[1];
-
-    Json::FastWriter fastWriter;
-    std::string a= fastWriter.write(data1);
-
-    std::cout << "json out " << a << std::endl;
-	//Dbms* d  = new Dbms();
-    //d->connect();
-    //ucout<< " concurrency "<< (concurrency::streams::fstream:: open_istream(U("."+message.relative_uri().path()),std::ios::in).get() )<< std::endl;  
-
-    concurrency::streams::fstream::open_istream(U("./index.html"), std::ios::in).then([=](concurrency::streams::istream is)
-    //concurrency::streams::fstream::open_istream(U("."+message.relative_uri().path()), std::ios::in).then([=](concurrency::streams::istream is)
-    {
-        
-        message.reply(status_codes::OK, U("text/htmls"), U(a))
-        //message.reply(status_codes::OK, is,  U("text/htmls"))
-		.then([](pplx::task<void> t)
-		{
-			try{
-                ucout << " handler message in the get: " << std::endl << std::endl;
-				t.get();
-                
-			}
-			catch(...){
-				//
-			}
-	});
-    }).then([=](pplx::task<void>t)
-	{
-		try{
-			t.get();
-		}
-		catch(...){
-			message.reply(status_codes::InternalError,U("INTERNAL ERROR "));
-		}
-	});
-
-    return;
-
-};
-*/
-//
 // A POST request
 //
-void handler::handle_post(http_request message)
+void Handler::handle_post(http_request message)
 {
-    ucout <<  message.to_string() << endl;
+    ucout <<  message.to_string() << std::endl;
 
 
      message.reply(status_codes::OK,message.to_string());
@@ -166,11 +92,11 @@ void handler::handle_post(http_request message)
 //
 // A DELETE request
 //
-void handler::handle_delete(http_request message)
+void Handler::handle_delete(http_request message)
 {
-     ucout <<  message.to_string() << endl;
+     ucout <<  message.to_string() << std::endl;
 
-        string rep = U("WRITE YOUR OWN DELETE OPERATION");
+        std::string rep = U("WRITE YOUR OWN DELETE OPERATION");
       message.reply(status_codes::OK,rep);
     return;
 };
@@ -179,10 +105,10 @@ void handler::handle_delete(http_request message)
 //
 // A PUT request 
 //
-void handler::handle_put(http_request message)
+void Handler::handle_put(http_request message)
 {
-    ucout <<  message.to_string() << endl;
-     string rep = U("WRITE YOUR OWN PUT OPERATION");
+    ucout <<  message.to_string() <<std::endl;
+     std::string rep = U("WRITE YOUR OWN PUT OPERATION");
      message.reply(status_codes::OK,rep);
     return;
 };

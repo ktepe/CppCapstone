@@ -24,25 +24,19 @@ link_libraries(${JSONCPP_LIBRARIES})
 
 # end of cpp rest sdk
 
-add_executable(HelloWorld src/main.cpp)
+#add_executable(HelloWorld src/main.cpp)
 
 add_executable(Client src/nclient.cpp)
 
-add_executable(Wserv  src/webserver.cpp src/handler.cpp src/json_parser.cpp)
-
-#add_executable(restserver
-#  main.cpp
-#  src/handler.cpp
-#  )
-
+add_executable(Server  src/server.cpp src/handler.cpp src/json_parser.cpp)
 
 #add_executable(Server src/server.cpp)
 
 #linking rest sdk to this 
-#target_link_libraries(HelloWorld PRIVATE cpprestsdk::cpprest ${Boost_SYSTEM_LIBRARY})
-target_link_libraries(HelloWorld PRIVATE cpprestsdk::cpprest)
+#target_link_libraries(HelloWorld PRIVATE cpprestsdk::cpprest)
 target_link_libraries(Client PRIVATE cpprestsdk::cpprest)
-target_link_libraries(Wserv PRIVATE cpprestsdk::cpprest ${Boost_SYSTEM_LIBRARY} ${JSONCPP_LIBRARIES})
+# target_link_libraries(Server PRIVATE cpprestsdk::cpprest ${Boost_SYSTEM_LIBRARY} ${JSONCPP_LIBRARIES})
+target_link_libraries(Server PRIVATE cpprestsdk::cpprest )
 #
 # rest sdk cmake lines
 #
