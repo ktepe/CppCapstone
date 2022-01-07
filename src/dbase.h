@@ -10,9 +10,7 @@
 
 namespace Dbase {
     std::vector<Info_Line> boat_read_csv(std::string filename){
-        // Reads a CSV file into a vector of <string, vector<int>> pairs where
-        // each pair represents <column name, column values>
-        // Create a vector of <string, int vector> pairs to store the result
+
         std::vector<Info_Line> result;
 
         // Create an input filestream
@@ -23,7 +21,6 @@ namespace Dbase {
 
         // Helper vars
         std::string line, colname;
-        int val;
 
         Info_Line _line;
 
@@ -33,7 +30,6 @@ namespace Dbase {
             // Extract the first line in the file
             std::getline(myFile, line);
         }
-
         // Read data, line by line
         while(std::getline(myFile, line))
         {
@@ -59,7 +55,7 @@ namespace Dbase {
 
     int get_price(const std::vector<Info_Line> &db, Info_Line asking_price)
     {
-        for (int i=0; i < db.size(); i++)
+        for (long unsigned int i=0; i < db.size(); i++)
         {    
             if (asking_price.make == db[i].make)
                 if(asking_price.length == db[i].length)
@@ -68,6 +64,14 @@ namespace Dbase {
         }
         return 0;
     };
+
+    int run_db(Info_Line boat_type)
+    {
+        auto d = boat_read_csv("../data/boat.csv");
+
+        return get_price(d, boat_type);
+
+    }
 } // name space
 
 #endif

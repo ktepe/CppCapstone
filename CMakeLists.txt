@@ -7,13 +7,15 @@ set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 set(CMAKE_BUILD_TYPE Debug)
 
-project(HelloWorld)
+#project(HelloWorld)
+project(Rest_API)
 
 #cpp rest sdk related lines
 set(cpprestsdk_DIR /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/cmake/)
 
 find_package(cpprestsdk CONFIG REQUIRED)
-find_package(Boost COMPONENTS system REQUIRED)
+#find_package(Boost COMPONENTS system REQUIRED)
+# end of cpp rest sdk
 
 #json package
 find_package(PkgConfig REQUIRED)
@@ -22,15 +24,11 @@ link_libraries(${JSONCPP_LIBRARIES})
 #target_link_libraries(myprogram ${JSONCPP_LIBRARIES})
 
 
-# end of cpp rest sdk
-
 #add_executable(HelloWorld src/main.cpp)
 
 add_executable(Client src/client.cpp)
 
 add_executable(Server  src/server.cpp src/handler.cpp src/json_parser.cpp)
-
-#add_executable(Server src/server.cpp)
 
 #linking rest sdk to this 
 #target_link_libraries(HelloWorld PRIVATE cpprestsdk::cpprest)

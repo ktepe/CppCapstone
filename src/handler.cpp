@@ -30,7 +30,6 @@ void Handler::handle_error(pplx::task<void>& t)
     }
 }
 
-
 //
 // Get Request 
 //
@@ -44,20 +43,21 @@ void Handler::handle_get(http_request message)
     std::string path1 = message.relative_uri().to_string();
     ucout << "path data string" << message.relative_uri().to_string() << std::endl;
     
-    //ucout<< " concurrency "<< (concurrency::streams::fstream:: open_istream(U("."+message.relative_uri().path()),std::ios::in).get() )<< std::endl;  
     concurrency::streams::fstream::open_istream(U("../data/index.html"), std::ios::in).then([=](concurrency::streams::istream is)
     // concurrency::streams::fstream::open_istream(U("."+message.relative_uri().path()), std::ios::in).then([=](concurrency::streams::istream is)
     {
         Json_Parser json_obj;
-        json_obj.parse(path1);
-        auto json_valstr = json_obj.get_string();
+        std::string json_valstr = json_obj.get_reply(path1);
+        //json_obj.get_string();
+
+        std::cout << "handle get reply "<< json_valstr << std::endl;
 
         message.reply(status_codes::OK, U(json_valstr), U("application/json"))
         //message.reply(status_codes::OK, is,  U("text/htmls"))
 		.then([](pplx::task<void> t)
 		{
 			try{
-                ucout << " handler message in the get: " << std::endl << std::endl;
+                //ucout << " handler message in the get: "  << std::endl;
 				t.get();
                 
 			}
