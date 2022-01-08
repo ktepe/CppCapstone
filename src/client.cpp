@@ -15,14 +15,14 @@ using namespace concurrency::streams;       // Asynchronous streams
 
 #define DBG 1
 
-Info_Line asking()
+Info_Line enter_req()
 {
     int len, year;
     Info_Line _line;
     std::string m;
     
     do {
-        std::cout<<"Enter Maker of the sailboat 'ben' for Benneteau and 'jen' for Jenneau: ";
+        std::cout<<"Enter Maker of the sailboat 'ben' for Beneteau and 'jen' for Jenneau: ";
         std::cin>>m;
         if (m == "ben") 
             m = "Beneteau";
@@ -105,7 +105,15 @@ int _client(Info_Line _input)
 
         Json::FastWriter fastWriter;
         std::cout << "Returned JSON string: "<< fastWriter.write(data1) << std::endl;
-        std::cout << "Price: "<< std::stoi(data1.get("price", "0").asString()) << std::endl;
+        auto pr = std::stoi(data1.get("price", "0").asString());
+        if (pr != 0)
+        {
+            std::cout << "Price: "<< pr << std::endl;
+        }
+        else
+        {
+            std::cout << "No data found for this boat " << std::endl;
+        }
 
         return response.body().read_to_end(fileStream->streambuf());
     })
@@ -131,16 +139,23 @@ int _client(Info_Line _input)
 
 int main(int argc, char* argv[])
 { 
-   //auto d = asking();
-   //
-   Info_Line ben("Beneteau", 50, 1999);
-   std::cout<<"In main:: You entered "<<ben.make<< " "<< ben.length << " ft.  "<< ben.year <<" model" <<std::endl;
+   
+   std::string select;
+
+   do {
+        
+       auto ben = enter_req();
+       // Info_Line ben("Beneteau", 50, 1999);
+       std::cout<<"In main:: You entered "<<ben.make<< " "<< ben.length << " ft.  "<< ben.year <<" model" <<std::endl;
  
-   _client(ben);
+       _client(ben);
+       
+       std::cout<< std::endl << "Press Q to quit " << std::endl;
+       std::cin>>select;
 
-    Info_Line jen("Jeanneau", 50, 2014);
-    std::cout<<"In main:: You entered "<<jen.make<< " "<< jen.length << " ft.  "<< jen.year <<" model" <<std::endl;
-
-    _client(jen);
+   }while(!(select == "q" || select == "Q") );
+   
+   std::cout<<"Client Quited" << std::endl;
+    
    return 0;
 }

@@ -53,6 +53,7 @@ namespace Dbase {
         return result;
     };
 
+    //search the db for the price
     int get_price(const std::vector<Info_Line> &db, Info_Line asking_price)
     {
         for (long unsigned int i=0; i < db.size(); i++)
