@@ -15,13 +15,16 @@ The Capstone Project illustrates a REST (Restfull API) using Microsoft's Casabla
   * Linux: make is installed by default on most Linux distros 
 * gcc/g++ >= 5.4
   * Linux: gcc / g++ is installed by default on most Linux distros
-
 * In addition to above following libraries needs to be installed
-* [CPP Rest sdk libraries](https://github.com/microsoft/cpprestsdk), which can be installed with [`sudo apt-get install libcpprest-dev`]
+* [CPP Rest sdk libraries developed by Microsoft--formerly Casablana--](https://github.com/microsoft/cpprestsdk), which can be installed with [`sudo apt-get install libcpprest-dev`] in Linux Ubuntu (20.04) distribution.
+* [JSON CPP libraries], which can be installed by using [`sudo apt-get install libjsoncpp-dev`] in Linux Ubuntu (20.04) distribution.
 
-in Linux Ubuntu (20.04) distribution.
-* [JSON CPP libraries], which can be installed by using `sudo apt-get install libjsoncpp-dev` in Linux Ubuntu (20.04) distribution.
 
+## Useful Links
+
+* [Full-fledged client-server example with C++ REST SDK 1.1.0](https://mariusbancila.ro/blog/2013/08/19/full-fledged-client-server-example-with-cpprest-sdk-110/) is extremely useful blog and explains REST API with sample code. 
+
+* [Micro-Service](https://github.com/ivanmejiarocha/micro-service) is another great repo to browse and review to undertand C++ REST API implementation. 
  
 ## Basic Build Instructions
 
