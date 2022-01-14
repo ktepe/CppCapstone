@@ -60,7 +60,9 @@ std::string Json_Parser::get_reply(std::string req_string)
 {   
     parse_req(req_string);
 
-    _value["price"]=std::to_string(Dbase::run_db(_info_line));
+    Dbase db;
+
+    _value["price"]=std::to_string(db.run_db(_info_line));
 
     std::cout << " get_reply "<< _value["price"] << std::endl;
 

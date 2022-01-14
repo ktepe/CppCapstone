@@ -2,8 +2,6 @@
 #define HANDLER_H
 #include <iostream>
 #include "stdafx.h"
-//#include "utils.h"
-//using namespace std;
 using namespace web;
 using namespace http;
 using namespace utility;
@@ -18,6 +16,7 @@ class Handler
         virtual ~Handler();
 
         pplx::task<void>open(){return m_listener.open();}
+        
         pplx::task<void>close(){return m_listener.close();}
 
     protected:

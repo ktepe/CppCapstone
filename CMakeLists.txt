@@ -28,7 +28,7 @@ link_libraries(${JSONCPP_LIBRARIES})
 
 add_executable(Client src/client.cpp)
 
-add_executable(Server  src/server.cpp src/handler.cpp src/json_parser.cpp)
+add_executable(Server  src/server.cpp src/handler.cpp src/json_parser.cpp src/dbase.cpp src/utils.cpp)
 
 #linking rest sdk to this 
 #target_link_libraries(HelloWorld PRIVATE cpprestsdk::cpprest)

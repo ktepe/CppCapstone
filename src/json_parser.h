@@ -5,6 +5,7 @@
 #include <jsoncpp/json/json.h>
 #include <string>
 #include <iostream>
+#include <mutex>
 #include "info_line.h"
 
 class Json_Parser
@@ -19,6 +20,8 @@ class Json_Parser
       private:
         Json::Value _value;
         Info_Line _info_line;
+        std::mutex _mutex;
+
 };
 
 #endif // JSON_PARSER_H
