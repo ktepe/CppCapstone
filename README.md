@@ -11,6 +11,7 @@ The Capstone Project illustrates a REST (Restfull API) using Microsoft's Casabla
 The developed REST API functinality is only implemented for GET command, and other HTTP commands like PUT, DELETE, and POST are not implemented. However, the implementation for GET feature can be easily expandable for the other commands. The demonstration of REST API enable a Client (user) to interact with database to search sailboat prices for a given make, year and lenght of sailboat. Rest of this README file explains the installation, and how we meet the requirements for the project rubric.
 
 
+
 ## Dependencies for Running Locally
 
 * cmake >= 3.9
@@ -227,8 +228,9 @@ class Json_Parser
 
 * Classes encapsulate behavior. For example in the Dbase class, the run_db function used private member functions and encapsulates the other database actions.
 
+
 ```C++
-	class Dbase 
+class Dbase 
 {
     public:
         int run_db(Info_Line boat_type);
@@ -287,17 +289,26 @@ Concurrency is inherently implemented in the MS REST API library functions, and 
 
 MS REST API implementation used ```.then``` to provide a future and promise in the library. 
 
-* A mutex or lock is used in the project.
+* A mutex or lock is used in the project. The database access is locked in ```Jason_Parser::get_reply`` method.
 
 
+```C++
 
-	
+std::string Json_Parser::get_reply(std::string req_string)
+{   
+    parse_req(req_string);
 
-A mutex or lock (e.g. std::lock_guard or `std::unique_lock) is used to protect data that is shared across multiple threads in the project code.
+    Dbase db;
+    //lock the data base access for this process.
+    std::lock_guard<std::mutex> mylock(_mutex);
 
-** A condition variable is used in the project.
-	
+    _value["price"]=std::to_string(db.run_db(_info_line));
 
-A std::condition_variable is used in the project code to synchronize thread execution.
+    std::cout << " get_reply "<< _value["price"] << std::endl;
+
+    return to_string(_value);
+}
+
+```
 
 
