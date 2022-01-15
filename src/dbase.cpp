@@ -5,7 +5,8 @@
 #include "info_line.h"
 #include "dbase.h"
 #include "utils.h"
-      
+#define DBG 0
+
 std::vector<Info_Line> Dbase::boat_read_csv(std::string filename)
 {
 
@@ -26,6 +27,10 @@ std::vector<Info_Line> Dbase::boat_read_csv(std::string filename)
     if(myFile.good())
     {
         // Extract the first line in the file
+
+#if DBG
+    std::cout << " Database file opened successfully "<< std::endl;
+#endif
         std::getline(myFile, line);
     }
     // Read data, line by line
@@ -33,17 +38,17 @@ std::vector<Info_Line> Dbase::boat_read_csv(std::string filename)
     {
         // Create a stringstream of the current line
         auto xx = Utils::split(line, ",");
-
+#if DBG
+    std::cout << "line in the file : "<< line <<std::endl;
+#endif           
         for (std::string t: xx)
             {
-                //std::cout << "t : "<< t << std::endl;
                 _line.index = std::stoi(xx[0]);
                 _line.make = xx[1];
                 _line.length = std::stoi(xx[2]);
                 _line.year = std::stoi(xx[3]);
                 _line.price = std::stoi(xx[4]);
-                //std::cout << "line.index : "<< _line.index << " line.price "<< _line.price <<std::endl;
-            }
+             }
         result.emplace_back(_line);
     }
     // Close file

@@ -151,6 +151,8 @@ int main(int argc, char* argv[])
        _client(ben);
        
        std::cout<< std::endl << "Press Q to quit " << std::endl;
+       std::cout<< std::endl << "Press Any other key to continue " << std::endl;
+       
        std::cin>>select;
 
    }while(!(select == "q" || select == "Q") );

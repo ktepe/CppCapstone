@@ -44,12 +44,10 @@ void Handler::handle_get(http_request message)
     ucout << "path data string" << message.relative_uri().to_string() << std::endl;
     
     concurrency::streams::fstream::open_istream(U("../data/index.html"), std::ios::in).then([=](concurrency::streams::istream is)
-    // concurrency::streams::fstream::open_istream(U("."+message.relative_uri().path()), std::ios::in).then([=](concurrency::streams::istream is)
     {
         Json_Parser json_obj;
         std::string json_valstr = json_obj.get_reply(path1);
-        //json_obj.get_string();
-
+        
         std::cout << "handle get reply "<< json_valstr << std::endl;
 
         message.reply(status_codes::OK, U(json_valstr), U("application/json"))
