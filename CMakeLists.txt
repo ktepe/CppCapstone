@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.9)
 
 add_definitions(-std=c++17)
 
@@ -28,7 +28,8 @@ link_libraries(${JSONCPP_LIBRARIES})
 
 add_executable(Client src/client.cpp)
 
-add_executable(Server  src/server.cpp src/handler.cpp src/json_parser.cpp src/dbase.cpp src/utils.cpp)
+add_executable(Server  src/server.cpp src/handler.cpp src/json_parser.cpp 
+src/dbase.cpp src/utils.cpp)
 
 #linking rest sdk to this 
 #target_link_libraries(HelloWorld PRIVATE cpprestsdk::cpprest)

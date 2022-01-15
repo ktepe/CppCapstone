@@ -61,6 +61,8 @@ std::string Json_Parser::get_reply(std::string req_string)
     parse_req(req_string);
 
     Dbase db;
+    //lock the data base access for this process.
+    std::lock_guard<std::mutex> mylock(_mutex);
 
     _value["price"]=std::to_string(db.run_db(_info_line));
 
