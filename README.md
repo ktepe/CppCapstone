@@ -24,6 +24,7 @@ The developed REST API functinality is only implemented for GET command, and oth
 * [CPP Rest sdk libraries developed by Microsoft--formerly Casablana--](https://github.com/microsoft/cpprestsdk), which can be installed with [`sudo apt-get install libcpprest-dev`] in Linux Ubuntu (20.04) distribution.
 * [JSON CPP libraries], which can be installed by using [`sudo apt-get install libjsoncpp-dev`] in Linux Ubuntu (20.04) distribution.
 
+* [Boost Libraries], which can be installed by using [`sudo apt-get install libboost-all-dev`] in Linux Ubuntu (20.04) distribution.
 
 ## Useful Links
 

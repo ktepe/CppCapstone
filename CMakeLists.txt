@@ -11,16 +11,14 @@ set(CMAKE_BUILD_TYPE Debug)
 project(Rest_API)
 
 #cpp rest sdk related lines
-set(cpprestsdk_DIR /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/cmake/)
-
-find_package(cpprestsdk CONFIG REQUIRED)
-#find_package(Boost COMPONENTS system REQUIRED)
+#set(cpprestsdk_DIR /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/cmake/)
 # end of cpp rest sdk
-
-#json package
+find_package(cpprestsdk CONFIG REQUIRED)
+find_package(Boost COMPONENTS system REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp)
-link_libraries(${JSONCPP_LIBRARIES})
+#find_package(jsoncpp REQUIRED)
+#link_libraries(${JSONCPP_LIBRARIES})
 #target_link_libraries(myprogram ${JSONCPP_LIBRARIES})
 
 
@@ -33,8 +31,8 @@ src/dbase.cpp src/utils.cpp)
 
 #linking rest sdk to this 
 #target_link_libraries(HelloWorld PRIVATE cpprestsdk::cpprest)
-target_link_libraries(Client PRIVATE cpprestsdk::cpprest)
-target_link_libraries(Server PRIVATE cpprestsdk::cpprest)
+target_link_libraries(Client PRIVATE cpprestsdk::cpprest ${JSONCPP_LIBRARIES} ${Boost_SYSTEM_LIBRARY})
+target_link_libraries(Server PRIVATE cpprestsdk::cpprest ${JSONCPP_LIBRARIES} ${Boost_SYSTEM_LIBRARY})
 #
 # rest sdk cmake lines
 #
